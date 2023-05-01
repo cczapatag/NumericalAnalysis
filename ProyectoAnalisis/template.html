@@ -1,0 +1,16 @@
+<!DOCTYPE html>
+<html>
+<head>
+    <title>Lista de funciones</title>
+</head>
+<body>
+    <h1>Lista de funciones</h1>
+    <ul>
+    {% for funcion in funciones %}
+        <li>{{ funcion.nombre }}: {{ funcion.descripcion }} ({{ funcion.ecuacion }})</li>
+    {% empty %}
+        <li>No hay funciones disponibles.</li>
+    {% endfor %}
+    </ul>
+</body>
+</html>
