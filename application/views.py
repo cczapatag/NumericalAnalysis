@@ -1,4 +1,5 @@
 from django.shortcuts import render
+import Biseccion
 
 # Create your views here.
 
@@ -6,6 +7,15 @@ def home(request):
     return render(request, 'index.html')
 
 def bisection(request):
+
+    if request.POST:
+        funcion = request.POST['funcion']
+        intervaloA = request.POST['intervaloA']
+        intervaloB = request.POST['intervaloB']
+        tolerancia = request.POST['tolerancia']
+
+        funcion = funcion.replace('^', '**')
+
     return render(request, 'bisection.html')
 
 def false_position(request):

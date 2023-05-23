@@ -33,35 +33,38 @@
             <div style="display: block;">
                 <div class="row">
                     <div class="col">
-                        <form>
+                        <form method="post">
+
+                            {% csrf_token %}
+
                             <div style="padding-top: 0px;margin-top: 10px;margin-bottom: 10px;">
                                 <div class="row">
                                     <div class="col-md-6 text-start"><strong>Function:</strong></div>
-                                    <div class="col-md-6 text-center"><input class="form-control" type="text" value="log(sin(x)^2 + 1)-(1/2)"></div>
+                                    <div class="col-md-6 text-center"><input class="form-control" type="text" value="log(sin(x)^2 + 1)-(1/2)" name="funcion"></div>
                                 </div>
                             </div>
                             <div style="padding-top: 0px;margin-top: 10px;margin-bottom: 10px;">
                                 <div class="row">
                                     <div class="col-md-6 text-start"><strong>Lower interval value (a):</strong></div>
-                                    <div class="col-md-6 text-center"><input class="form-control" type="text"></div>
+                                    <div class="col-md-6 text-center"><input class="form-control" type="number" name="intervaloA"></div>
                                 </div>
                             </div>
                             <div style="padding-top: 0px;margin-top: 10px;margin-bottom: 10px;">
                                 <div class="row">
                                     <div class="col-md-6 text-start"><strong>Higher interval value (b):</strong></div>
-                                    <div class="col-md-6 text-center"><input class="form-control" type="text"></div>
+                                    <div class="col-md-6 text-center"><input class="form-control" type="number" name="intervaloB"></div>
                                 </div>
                             </div>
                             <div style="padding-top: 0px;margin-top: 10px;margin-bottom: 10px;">
                                 <div class="row">
                                     <div class="col-md-6 text-start"><strong>Tolerance:</strong></div>
-                                    <div class="col-md-6 text-center"><input class="form-control" type="text" value="1e-7"></div>
+                                    <div class="col-md-6 text-center"><input class="form-control" type="text" value="1e-7" name="tolerancia"></div>
                                 </div>
                             </div>
                             <div style="padding-top: 0px;margin-top: 10px;margin-bottom: 10px;">
                                 <div class="row">
                                     <div class="col-md-6 text-start"><strong>Max iterations (Max 100):</strong></div>
-                                    <div class="col-md-6 text-center"><input class="form-control" type="text" value="100"></div>
+                                    <div class="col-md-6 text-center"><input class="form-control" type="number" value="100" name="iteraciones"></div>
                                 </div>
                             </div><button class="btn btn-primary d-block w-100" type="submit">Send</button>
                         </form>
