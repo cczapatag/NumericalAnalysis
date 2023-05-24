@@ -1,5 +1,6 @@
 from django.shortcuts import render
 from application.Biseccion import Biseccion
+from application.ReglaFalsa import ReglaFalsa
 
 # Create your views here.
 
@@ -8,6 +9,43 @@ def home(request):
 
 def bisection(request):
 
+    resultado = mensaje = datos = None
+
+    if request.POST:
+        funcion = request.POST['funcion']
+        intervaloA = request.POST['intervaloA']
+        intervaloB = request.POST['intervaloB']
+        tolerancia = request.POST['tolerancia']
+        iteraciones = request.POST['iteraciones']
+
+        intervaloA = int(intervaloA)
+        intervaloB = int(intervaloB)
+
+        if intervaloA < intervaloB:
+
+            tolerancia = float(tolerancia)
+            iteraciones = int(iteraciones)
+
+            datos = {
+                'fun' : funcion,
+                'a' : intervaloA,
+                'b' : intervaloB,
+                'tol' : '{:.1e}'.format(tolerancia).replace('e-0', 'e-'),
+                'iter' : iteraciones
+            }
+
+            funcion = funcion.replace('^', '**')
+
+            resultado, mensaje = Biseccion.bisection(funcion, intervaloA, intervaloB, tolerancia, iteraciones)
+        
+        else:
+
+            mensaje = f'Error: \'a\' has to be less than \'b\': a = {intervaloA} and b = {intervaloB}'
+
+    return render(request, 'bisection.html', {'resultado': resultado, 'mensaje': mensaje, 'datos': datos})
+
+def false_position(request):
+    
     resultado = mensaje = datos = None
 
     if request.POST:
@@ -32,11 +70,8 @@ def bisection(request):
 
         funcion = funcion.replace('^', '**')
 
-        resultado, mensaje = Biseccion.bisection(funcion, intervaloA, intervaloB, tolerancia, iteraciones)
+        resultado, mensaje = ReglaFalsa.false_position(funcion, intervaloA, intervaloB, tolerancia, iteraciones)
 
-    return render(request, 'bisection.html', {'resultado': resultado, 'mensaje': mensaje, 'datos': datos})
-
-def false_position(request):
     return render(request, 'false-position.html')
 
 def fixed_point(request):

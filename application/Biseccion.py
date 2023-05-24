@@ -20,18 +20,6 @@ class Biseccion():
             aproximaciones sucesivas. El segundo elemento es un mensaje indicando si se encontró una raíz o si se alcanzó
             el número máximo de iteraciones.
         
-        if not callable(f):
-            raise TypeError("El argumento 'f' debe ser una función.")
-        if not isinstance(a, (int, float)):
-            raise TypeError("El argumento 'a' debe ser un número.")
-        if not isinstance(b, (int, float)):
-            raise TypeError("El argumento 'b' debe ser un número.")
-        if not isinstance(tol, (int, float)) or tol <= 0:
-            raise ValueError("El argumento 'tol' debe ser un número positivo.")
-        if not isinstance(max_iterations, int) or max_iterations <= 0:
-            raise ValueError(
-                "El argumento 'max_iterations' debe ser un entero positivo.")
-        
         """
 
         results = []
@@ -49,9 +37,9 @@ class Biseccion():
         fb = eval(f, globals(), valorX)  
 
         if fa == 0:
-            return [], f"{a} es raíz"
+            return [], f"An approximation of the roof was found for m = {a}"
         elif fb == 0:
-            return [], f"{b} es raíz"
+            return [], f"An approximation of the roof was found for m = {b}"
         elif fa * fb < 0:
             x = (a + b) / 2
             valorX['x'] = x
@@ -79,11 +67,9 @@ class Biseccion():
                 iteration += 1
                 results.append([iteration, '{:.10f}'.format(a), '{:.10f}'.format(x), '{:.10f}'.format(b), '{:.1e}'.format(fx).replace('e-0', 'e-'),'{:.1e}'.format(error).replace('e-0', 'e-')])
             if fx == 0:
-                return results, f"{x} es raíz"
+                return results, f"An approximation of the roof was found for m = {x}"
             elif error <= tol:
-                return results, f"{x} se aproxima a una raíz con una tolerancia de {tol}"
+                return results, f"An approximation of the roof was found for m = {x}"
             else:
-                return results, "Se alcanzó el número máximo de iteraciones"
-        else:
-            return [], "El intervalo es inadecuado"
+                return results, "Given the number of iterations and the tolerance, it was impossible to find a satisfying root"
 
