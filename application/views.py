@@ -57,22 +57,29 @@ def false_position(request):
 
         intervaloA = int(intervaloA)
         intervaloB = int(intervaloB)
-        tolerancia = float(tolerancia)
-        iteraciones = int(iteraciones)
 
-        datos = {
-            'fun' : funcion,
-            'a' : intervaloA,
-            'b' : intervaloB,
-            'tol' : '{:.1e}'.format(tolerancia).replace('e-0', 'e-'),
-            'iter' : iteraciones
-        }
+        if intervaloA < intervaloB:
 
-        funcion = funcion.replace('^', '**')
+            tolerancia = float(tolerancia)
+            iteraciones = int(iteraciones)
 
-        resultado, mensaje = ReglaFalsa.false_position(funcion, intervaloA, intervaloB, tolerancia, iteraciones)
+            datos = {
+                'fun' : funcion,
+                'a' : intervaloA,
+                'b' : intervaloB,
+                'tol' : '{:.1e}'.format(tolerancia).replace('e-0', 'e-'),
+                'iter' : iteraciones
+            }
 
-    return render(request, 'false-position.html')
+            funcion = funcion.replace('^', '**')
+
+            resultado, mensaje = ReglaFalsa.false_position(funcion, intervaloA, intervaloB, tolerancia, iteraciones)
+        
+        else:
+
+            mensaje = f'Error: \'a\' has to be less than \'b\': a = {intervaloA} and b = {intervaloB}'
+
+    return render(request, 'false-position.html', {'resultado': resultado, 'mensaje': mensaje, 'datos': datos})
 
 def fixed_point(request):
     return render(request, 'fixed-point.html')

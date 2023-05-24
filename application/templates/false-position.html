@@ -29,47 +29,88 @@
     </nav>
     <main data-bs-toggle="tooltip" data-bss-tooltip="" class="page landing-page" style="color: var(--bs-blue);background: var(--bs-gray-dark);padding-top: 0px;">
         <div class="container">
-            <h1 class="text-center text-white" style="margin-bottom: 30px;margin-top: 16px;">False position</h1>
+            <h1 class="text-center text-white" style="margin-bottom: 30px;margin-top: 16px;">False Position</h1>
             <div style="display: block;">
-                <div class="row">
-                    <div class="col">
-                        <form method="post">
+                <div class="row d-flex float-none flex-row">
+                    <div class="col-lg-5" style="padding-bottom: 0px;margin: 0px;margin-bottom: 10px;">
+
+                        {% if datos %}
                             <div style="padding-top: 0px;margin-top: 10px;margin-bottom: 10px;">
                                 <div class="row">
                                     <div class="col-md-6 text-start"><strong>Function:</strong></div>
-                                    <div class="col-md-6 text-center"><input class="form-control" type="text" value="log(sin(x)^2 + 1)-(1/2)"></div>
+                                    <div class="col-md-6 text-center">{{datos.fun}}</strong></div>
                                 </div>
                             </div>
                             <div style="padding-top: 0px;margin-top: 10px;margin-bottom: 10px;">
                                 <div class="row">
                                     <div class="col-md-6 text-start"><strong>Lower interval value (a):</strong></div>
-                                    <div class="col-md-6 text-center"><input class="form-control" type="text"></div>
+                                    <div class="col-md-6 text-center">{{datos.a}}</strong></div>
                                 </div>
                             </div>
                             <div style="padding-top: 0px;margin-top: 10px;margin-bottom: 10px;">
                                 <div class="row">
                                     <div class="col-md-6 text-start"><strong>Higher interval value (b):</strong></div>
-                                    <div class="col-md-6 text-center"><input class="form-control" type="text"></div>
+                                    <div class="col-md-6 text-center">{{datos.b}}</strong></div>
                                 </div>
                             </div>
                             <div style="padding-top: 0px;margin-top: 10px;margin-bottom: 10px;">
                                 <div class="row">
                                     <div class="col-md-6 text-start"><strong>Tolerance:</strong></div>
-                                    <div class="col-md-6 text-center"><input class="form-control" type="text" value="1e-7"></div>
+                                    <div class="col-md-6 text-center">{{datos.tol}}</strong></div>
                                 </div>
                             </div>
                             <div style="padding-top: 0px;margin-top: 10px;margin-bottom: 10px;">
                                 <div class="row">
                                     <div class="col-md-6 text-start"><strong>Max iterations (Max 100):</strong></div>
-                                    <div class="col-md-6 text-center"><input class="form-control" type="text" value="100"></div>
+                                    <div class="col-md-6 text-center">{{datos.iter}}</strong></div>
                                 </div>
-                            </div><button class="btn btn-primary d-block w-100" type="submit">Send</button>
-                        </form>
+                            </div><a class="btn btn-primary d-block w-100" role="button" style="margin-top: 16px;" href="../bisection">Return</a>
+
+                        {% else %}
+
+                            <form method="post" id="formulario">
+
+                                {% csrf_token %}
+
+                                <div style="padding-top: 0px;margin-top: 10px;margin-bottom: 10px;">
+                                    <div class="row">
+                                        <div class="col-md-6 text-start"><strong>Function:</strong></div>
+                                        <div class="col-md-6 text-center"><input class="form-control" type="text" value="log(sin(x)^2 + 1)-(1/2)" name="funcion" required></div>
+                                    </div>
+                                </div>
+                                <div style="padding-top: 0px;margin-top: 10px;margin-bottom: 10px;">
+                                    <div class="row">
+                                        <div class="col-md-6 text-start"><strong>Lower interval value (a):</strong></div>
+                                        <div class="col-md-6 text-center"><input class="form-control" type="number" name="intervaloA" value="0" required></div>
+                                    </div>
+                                </div>
+                                <div style="padding-top: 0px;margin-top: 10px;margin-bottom: 10px;">
+                                    <div class="row">
+                                        <div class="col-md-6 text-start"><strong>Higher interval value (b):</strong></div>
+                                        <div class="col-md-6 text-center"><input class="form-control" type="number" name="intervaloB" value="1" required></div>
+                                    </div>
+                                </div>
+                                <div style="padding-top: 0px;margin-top: 10px;margin-bottom: 10px;">
+                                    <div class="row">
+                                        <div class="col-md-6 text-start"><strong>Tolerance:</strong></div>
+                                        <div class="col-md-6 text-center"><input class="form-control" type="text" value="1e-7" name="tolerancia" required></div>
+                                    </div>
+                                </div>
+                                <div style="padding-top: 0px;margin-top: 10px;margin-bottom: 10px;">
+                                    <div class="row">
+                                        <div class="col-md-6 text-start"><strong>Max iterations (Max 100):</strong></div>
+                                        <div class="col-md-6 text-center"><input class="form-control" type="number" value="100" name="iteraciones" required></div>
+                                    </div>
+                                </div><button class="btn btn-primary d-block w-100" type="submit" style="margin-top: 16px;">Send</button>
+                            </form>
+
+                        {% endif %}
+
                     </div>
-                    <div class="col">
+                    <div class="col text-break d-flex flex-column" style="margin: 0px;margin-bottom: 10px;">
                         <div>
                             <div class="table-responsive text-center">
-                                <table class="table table-striped-columns table-dark table-sm">
+                                <table class="table table-striped table-dark table-sm">
                                     <thead>
                                         <tr class="text-center">
                                             <th>Iteration</th>
@@ -81,20 +122,44 @@
                                         </tr>
                                     </thead>
                                     <tbody class="text-center">
-                                        <tr>
-                                            <td>0</td>
-                                            <td>0</td>
-                                            <td>0</td>
-                                            <td>0</td>
-                                            <td>0</td>
-                                            <td>0</td>
-                                        </tr>
+                                        {% if resultado %}
+
+                                            {% for datos in resultado %}    
+
+                                            <tr>
+                                                {% for dato in datos %} 
+
+                                                    <td>{{dato}}</td>
+
+                                                {% endfor %} 
+                                            </tr>
+
+                                            {% endfor %} 
+
+                                        {% else %}
+                                            <tr>
+                                                <td>0</td>
+                                                <td>0</td>
+                                                <td>0</td>
+                                                <td>0</td>
+                                                <td>0</td>
+                                                <td>0</td>
+                                            </tr>
+                                        {% endif %}
                                     </tbody>
                                 </table>
                             </div>
                         </div>
                         <div>
-                            <p>An approximation of the roof was found for m = 0</p>
+                            {% if mensaje %}
+
+                                <p class="text-start text-sm-center">{{mensaje}}</p>
+
+                            {% else %}
+
+                                <p class="text-start text-sm-center">An approximation of the roof was found for m = 0</p>
+
+                            {% endif %}
                         </div>
                     </div>
                 </div>
@@ -103,6 +168,9 @@
                 <h1 class="text-center" style="padding-top: 0px;margin-top: 14px;">How to use it?</h1>
                 <p>The function must be continuous and differentiable, in addition the specific function evaluated at the interval ends must have a different sign.<br>The value of a must be minor than b.<br>Tolerance must have a positive value.<br>The iteration number must be positive.</p>
             </div>
+        </div>
+        <div class="container">
+            <br>
         </div>
     </main>
     <script src="{% static 'assets/bootstrap/js/bootstrap.min.js' %}"></script>
