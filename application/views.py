@@ -1,6 +1,7 @@
 from django.shortcuts import render
 from application.Biseccion import Biseccion
 from application.ReglaFalsa import ReglaFalsa
+from application.PuntoFijo import PuntoFijo
 
 # Create your views here.
 
@@ -82,7 +83,34 @@ def false_position(request):
     return render(request, 'false-position.html', {'resultado': resultado, 'mensaje': mensaje, 'datos': datos})
 
 def fixed_point(request):
-    return render(request, 'fixed-point.html')
+
+    resultado = mensaje = datos = None
+
+    if request.POST:
+        funcionf = request.POST['funcionf']
+        funciong = request.POST['funciong']   
+        x0 = request.POST['x0']
+        tolerancia = request.POST['tolerancia']
+        iteraciones = request.POST['iteraciones']
+
+        x0 = float(x0)
+        tolerancia = float(tolerancia)
+        iteraciones = int(iteraciones)
+
+        datos = {
+            'funf' : funcionf,
+            'fung' : funciong,
+            'x0' : x0,
+            'tol' : '{:.1e}'.format(tolerancia).replace('e-0', 'e-'),
+            'iter' : iteraciones
+        }
+
+        funcionf = funcionf.replace('^', '**')
+        funciong = funciong.replace('^', '**')
+
+        resultado, mensaje = PuntoFijo.fixed_point(funcionf, funciong, x0, tolerancia, iteraciones)
+
+    return render(request, 'fixed-point.html', {'resultado': resultado, 'mensaje': mensaje, 'datos': datos})
 
 def gauss_seidel(request):
     return render(request, 'gauss-seidel.html')

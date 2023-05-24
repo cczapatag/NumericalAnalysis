@@ -1,4 +1,3 @@
-import pandas as pd
 from math import *
 
 class Biseccion():
@@ -27,8 +26,6 @@ class Biseccion():
         b = float(b)
 
         valorX = { 'x' : a}
-
-        f = f.replace('^', '**')
 
         fa = eval(f, globals(), valorX)   
         
