@@ -21,12 +21,65 @@
                     <li class="nav-item dropdown"><a class="dropdown-toggle nav-link link-light placeholder" aria-expanded="false" data-bs-toggle="dropdown" href="#" style="background: var(--bs-dark);">Methods</a>
                         <div class="dropdown-menu"><a class="dropdown-item" href="../bisection">Bisection</a><a class="dropdown-item" href="../false-position">False position</a><a class="dropdown-item" href="../fixed-point">Fixed point</a><a class="dropdown-item" href="../newton-raphson">Newton-Raphson</a><a class="dropdown-item" href="../multiple-roots">Multiple roots</a><a class="dropdown-item" href="../secant">Secant</a>
                             <div class="dropdown-divider"></div><a class="dropdown-item" href="../jacobi">Jacobi</a><a class="dropdown-item" href="../gauss-seidel">Gauss Seidel</a><a class="dropdown-item" href="../sor">SOR</a>
+                            <div class="dropdown-divider"></div><a class="dropdown-item" href="#">Vandermonde</a><a class="dropdown-item text-break" href="#">Newton (Divided Difference)</a><a class="dropdown-item" href="#">Spline</a>
                         </div>
                     </li>
                 </ul>
             </div>
         </div>
     </nav>
+    <main data-bs-toggle="tooltip" data-bss-tooltip="" class="page landing-page" style="color: var(--bs-purple);background: var(--bs-gray-dark);padding-top: 0px;">
+        <div class="container" style="margin-bottom: 20px;">
+            <h1 class="text-center text-white" style="margin-bottom: 30px;margin-top: 16px;">Jacobi</h1>
+            <div style="display: inline-flex;">
+                <div class="row d-flex float-none flex-row" style="display: flex;">
+                    <div class="col-lg-5 align-self-end" style="padding-bottom: 0px;margin: 0px;margin-bottom: 10px;">
+                        <form method="post">
+                            <div style="padding-top: 0px;margin-top: 10px;margin-bottom: 10px;">
+                                <div class="row">
+                                    <div class="col-md-6 text-start"><strong>Tolerance:</strong></div>
+                                    <div class="col-md-6 text-center"><input class="form-control" type="text" value="1e-7"></div>
+                                </div>
+                            </div>
+                            <div style="padding-top: 0px;margin-top: 10px;margin-bottom: 10px;">
+                                <div class="row">
+                                    <div class="col-md-6 text-start"><strong>Max iterations (Max 100):</strong></div>
+                                    <div class="col-md-6 text-center"><input class="form-control" type="text" value="100"></div>
+                                </div>
+                            </div><button class="btn btn-primary d-block w-100" type="submit" style="margin-top: 16px;background: var(--bs-purple);">Send</button>
+                        </form>
+                    </div>
+                    <div class="col-lg-5 offset-lg-1 text-break text-center d-flex m-auto" style="margin: 0px;margin-bottom: 10px;padding-right: 1px;padding-left: 0px;margin-left: 0px;">
+                        <div class="d-flex" style="display: inline-flex;position: relative;margin: 10px;margin-top: 0;">
+                            <form class="text-center" style="padding-right: 0px;padding-left: 0px;">
+                                <p class="text-center">Matrix A</p>
+                                <div class="text-center" style="display: inline-flex;padding: 0;padding-right: 0;padding-left: 0;margin: 5px;"><input class="form-control" type="text" style="margin: 0px 5px;margin-right: 5px;"><input class="form-control" type="text" style="margin: 0 5px;"></div>
+                                <div class="text-center" style="display: inline-flex;padding: 0;padding-right: 0;padding-left: 0;margin: 5px;"><input class="form-control" type="text" style="margin: 0px 5px;margin-right: 5px;"><input class="form-control" type="text" style="margin: 0 5px;"></div><button class="btn btn-primary" type="button" style="margin-top: 12px;background: var(--bs-purple);">Save A</button>
+                            </form>
+                        </div>
+                        <div class="d-inline-flex" style="position: relative;display: inline-flex;margin: 10px;margin-top: 0px;">
+                            <form class="text-center">
+                                <p class="text-center">x0</p>
+                                <div class="text-center" style="display: inline-flex;padding: 0;padding-right: 0;padding-left: 0;margin: 5px;"><input class="form-control" type="text" style="margin: 0px 5px;margin-right: 5px;"></div>
+                                <div class="text-center" style="display: inline-flex;padding: 0;padding-right: 0;padding-left: 0;margin: 5px;"><input class="form-control" type="text" style="margin: 0px 5px;margin-right: 5px;"></div><button class="btn btn-primary" type="button" style="margin-top: 12px;background: var(--bs-purple);">Save x0</button>
+                            </form>
+                        </div>
+                        <div class="d-inline-flex" style="position: relative;display: inline-flex;margin: 10px;margin-top: 0px;">
+                            <form class="text-center">
+                                <p class="text-center">Matrix B</p>
+                                <div class="text-center" style="display: inline-flex;padding: 0;padding-right: 0;padding-left: 0;margin: 5px;"><input class="form-control" type="text" style="margin: 0px 5px;margin-right: 5px;"></div>
+                                <div class="text-center" style="display: inline-flex;padding: 0;padding-right: 0;padding-left: 0;margin: 5px;"><input class="form-control" type="text" style="margin: 0px 5px;margin-right: 5px;"></div><button class="btn btn-primary" type="button" style="margin-top: 12px;background: var(--bs-purple);">Save B</button>
+                            </form>
+                        </div>
+                    </div>
+                </div>
+            </div>
+            <div style="margin-bottom: 0px;padding-bottom: 0px;">
+                <h1 class="text-center" style="padding-top: 0px;margin-top: 14px;">How to use it?</h1>
+                <p>The input in the methods help you to be sure in the dimension of the matrix.<br>The determinant of the matrix cannot be 0.<br>The matrix cannot have a 0 on the diagonal, although the method is made in such a way that it does not stop.</p>
+            </div>
+        </div>
+    </main>
     <script src="{% static 'assets/bootstrap/js/bootstrap.min.js' %}"></script>
     <script src="{% static 'assets/js/bs-init.js' %}"></script>
     <script src="{% static 'assets/js/baguetteBox.min.js' %}"></script>
