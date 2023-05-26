@@ -173,9 +173,7 @@ def jacobi(request):
         try:
 
             matrizA = matriz(matrizA)
-
             x0 = matriz1(x0)
-
             matrizB = matriz1(matrizB)
 
             if size(matrizA) and size(x0) and size(matrizB) and len(matrizA) == len(x0) and len(matrizA) == len(matrizB):
