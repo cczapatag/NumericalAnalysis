@@ -3,6 +3,7 @@ from application.Biseccion import Biseccion
 from application.ReglaFalsa import ReglaFalsa
 from application.PuntoFijo import PuntoFijo
 from application.Jacobi import Jacobi
+from application.Gauss import Seidel
 
 # Create your views here.
 
@@ -114,7 +115,44 @@ def fixed_point(request):
     return render(request, 'fixed-point.html', {'resultado': resultado, 'mensaje': mensaje, 'datos': datos})
 
 def gauss_seidel(request):
-    return render(request, 'gauss-seidel.html')
+        
+    resultado = mensaje = datos = None
+
+    if request.POST:
+
+        matrizA = request.POST['matrizA']
+        x0 = request.POST['x0']
+        matrizB = request.POST['matrizB']
+        tolerancia = request.POST['tolerancia']
+        iteraciones = request.POST['iteraciones']
+
+        tolerancia = float(tolerancia)
+        iteraciones = int(iteraciones)
+
+        try:
+            matrizA = matriz(matrizA)
+            x0 = matriz(x0)
+            matrizB = matriz(matrizB)
+
+            if size(matrizA) and size(x0) and size(matrizB) and len(matrizA) == len(x0) and len(matrizA) == len(matrizB):
+                
+                datos = {
+                    'matrizA' : matrizA,
+                    'matrizB' : matrizB,
+                    'x0' : x0,
+                    'tol' : '{:.1e}'.format(tolerancia).replace('e-0', 'e-'),
+                    'iter' : iteraciones,
+                }
+
+                resultado, mensaje = Seidel.seidel(matrizA, matrizB, x0, iteraciones, tolerancia)
+
+            else:
+                mensaje = "The matrixes had different sizes."
+
+        except:
+            mensaje = "An error has occurred on the input."
+
+    return render(request, 'gauss-seidel.html', {'resultado': resultado, 'mensaje': mensaje, 'datos': datos})
 
 def jacobi(request):
 
