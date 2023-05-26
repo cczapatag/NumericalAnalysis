@@ -132,8 +132,8 @@ def gauss_seidel(request):
 
         try:
             matrizA = matriz(matrizA)
-            x0 = matriz(x0)
-            matrizB = matriz(matrizB)
+            x0 = matriz1(x0)
+            matrizB = matriz1(matrizB)
 
             if size(matrizA) and size(x0) and size(matrizB) and len(matrizA) == len(x0) and len(matrizA) == len(matrizB):
                 
@@ -171,9 +171,12 @@ def jacobi(request):
         iteraciones = int(iteraciones)
 
         try:
+
             matrizA = matriz(matrizA)
-            x0 = matriz(x0)
-            matrizB = matriz(matrizB)
+
+            x0 = matriz1(x0)
+
+            matrizB = matriz1(matrizB)
 
             if size(matrizA) and size(x0) and size(matrizB) and len(matrizA) == len(x0) and len(matrizA) == len(matrizB):
                 
@@ -223,8 +226,8 @@ def sor(request):
 
         try:
             matrizA = matriz(matrizA)
-            x0 = matriz(x0)
-            matrizB = matriz(matrizB)
+            x0 = matriz1(x0)
+            matrizB = matriz1(matrizB)
 
             if size(matrizA) and size(x0) and size(matrizB) and len(matrizA) == len(x0) and len(matrizA) == len(matrizB):
 
@@ -237,7 +240,7 @@ def sor(request):
                     'relajacion' : w
                 }
 
-                resultado = SOR.sor(matrizA, matrizB, x0, w, tolerancia, iteraciones)
+                resultado, mensaje = SOR.sor(matrizA, matrizB, x0, w, tolerancia, iteraciones)
 
             else:
                 mensaje = "The matrixes had different sizes."
@@ -254,11 +257,6 @@ def matriz(mtz):
     arr = []
     arr2 = []
 
-    if len(mtz) == 3:
-        arr.append(float(mtz[0]))
-        arr.append(float(mtz[2]))
-        return arr
-
     i = 0
     while i < len(mtz):
         if mtz[i] == ';':
@@ -274,6 +272,22 @@ def matriz(mtz):
 
     return arr
 
+def matriz1(mtz):
+    
+    mtz = mtz.split(' ')
+
+    arr = []
+
+    i = 0
+    while i < len(mtz):
+        arr.append(float(mtz[i]))
+        i += 2
+
+    return arr
+
 def size(mtz):
-    subarray_sizes = [len(subarr) for subarr in mtz]
-    return all(size == subarray_sizes[0] for size in subarray_sizes)
+    try:
+        subarray_sizes = [len(subarr) for subarr in mtz]
+        return all(size == subarray_sizes[0] for size in subarray_sizes)
+    except:
+        return True

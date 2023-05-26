@@ -12,24 +12,35 @@ class Seidel():
         t = np.matmul(inv(d - l), u)
         c = np.matmul(inv(d - l), b)
 
-        if max(abs(eigvals(t))) > 1:
+        if np.max(abs(eigvals(t))) > 1:
             return tableListData , "The function doesn't converge"
         
         if np.linalg.det(a) == 0:
             return tableListData, "det(A) is 0. The method cannot be executed."
 
         xn = np.matmul(t, x0) + c
-        cont = 0
-        e = 1000
-        while (x0 != xn).all() and cont < n and e > tol:
+        cont = 1
+        error = np.max(np.abs(x0 - xn))
+
+        tempMapIterData['iteracion'] = str(cont)
+        tempMapIterData['x0'] = str(x0)
+        tempMapIterData['xn'] = str(xn)
+        tempMapIterData['E'] = '{:.1e}'.format(error).replace('error-0', 'error-')
+        tableListData.append(tempMapIterData.copy())
+        tempMapIterData.clear()
+
+        while (x0 != xn).all() and cont < n and error > tol:
             x0 = xn
             xn = np.matmul(t, x0) + c
             cont += 1
-            e = norm(x0 - xn)
+            error = np.max(np.abs(x0 - xn))
+
+            xn = np.around(xn, decimals=10)
+
             tempMapIterData['iteracion'] = str(cont)
             tempMapIterData['x0'] = str(x0)
             tempMapIterData['xn'] = str(xn)
-            tempMapIterData['E'] = '{:.1e}'.format(e).replace('e-0', 'e-')
+            tempMapIterData['E'] = '{:.1e}'.format(error).replace('error-0', 'error-')
             tableListData.append(tempMapIterData.copy())
             tempMapIterData.clear()
 
