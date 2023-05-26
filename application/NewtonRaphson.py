@@ -17,17 +17,6 @@ def newton_raphson(f, df, x0, tol, max_iterations):
         iteración actual y el error absoluto entre las aproximaciones sucesivas. El segundo elemento es un mensaje
         indicando si se encontró una raíz o si se alcanzó el número máximo de iteraciones.
     """
-    if not callable(f):
-        raise TypeError("El argumento 'f' debe ser una función.")
-    if not callable(df):
-        raise TypeError("El argumento 'df' debe ser una función.")
-    if not isinstance(x0, (int, float)):
-        raise TypeError("El argumento 'x0' debe ser un número.")
-    if not isinstance(tol, (int, float)) or tol <= 0:
-        raise ValueError("El argumento 'tol' debe ser un número positivo.")
-    if not isinstance(max_iterations, int) or max_iterations <= 0:
-        raise ValueError(
-            "El argumento 'max_iterations' debe ser un entero positivo.")
 
     results = []
     x = x0
