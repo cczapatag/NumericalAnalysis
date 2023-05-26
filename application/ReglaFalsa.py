@@ -73,3 +73,5 @@ class ReglaFalsa():
                 return results, f"An approximation of the roof was found for m = {x}"
             else:
                 return results, "Given the number of iterations and the tolerance, it was impossible to find a satisfying root"
+        else:
+            return results, "Error: There was no found a root in the interval of the function"

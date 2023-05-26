@@ -39,33 +39,33 @@
                             <div style="padding-top: 0px;margin-top: 10px;margin-bottom: 10px;">
                                 <div class="row">
                                     <div class="col-md-6 text-start"><strong>Function:</strong></div>
-                                    <div class="col-md-6 text-center">{{datos.fun}}</strong></div>
+                                    <div class="col-md-6 text-center" style="color: #fff">{{datos.fun}}</strong></div>
                                 </div>
                             </div>
                             <div style="padding-top: 0px;margin-top: 10px;margin-bottom: 10px;">
                                 <div class="row">
                                     <div class="col-md-6 text-start"><strong>Lower interval value (a):</strong></div>
-                                    <div class="col-md-6 text-center">{{datos.a}}</strong></div>
+                                    <div class="col-md-6 text-center" style="color: #fff">{{datos.a}}</strong></div>
                                 </div>
                             </div>
                             <div style="padding-top: 0px;margin-top: 10px;margin-bottom: 10px;">
                                 <div class="row">
                                     <div class="col-md-6 text-start"><strong>Higher interval value (b):</strong></div>
-                                    <div class="col-md-6 text-center">{{datos.b}}</strong></div>
+                                    <div class="col-md-6 text-center" style="color: #fff">{{datos.b}}</strong></div>
                                 </div>
                             </div>
                             <div style="padding-top: 0px;margin-top: 10px;margin-bottom: 10px;">
                                 <div class="row">
                                     <div class="col-md-6 text-start"><strong>Tolerance:</strong></div>
-                                    <div class="col-md-6 text-center">{{datos.tol}}</strong></div>
+                                    <div class="col-md-6 text-center" style="color: #fff">{{datos.tol}}</strong></div>
                                 </div>
                             </div>
                             <div style="padding-top: 0px;margin-top: 10px;margin-bottom: 10px;">
                                 <div class="row">
                                     <div class="col-md-6 text-start"><strong>Max iterations (Max 100):</strong></div>
-                                    <div class="col-md-6 text-center">{{datos.iter}}</strong></div>
+                                    <div class="col-md-6 text-center" style="color: #fff">{{datos.iter}}</strong></div>
                                 </div>
-                            </div><a class="btn btn-primary d-block w-100" role="button" style="margin-top: 16px; background: var(--bs-purple);" href="../bisection">Return</a>
+                            </div><a class="btn btn-primary d-block w-100" role="button" style="margin-top: 16px; background: var(--bs-purple);" href="../false-position">Back</a>
 
                         {% else %}
 
@@ -154,11 +154,11 @@
                         <div>
                             {% if mensaje %}
 
-                                <p class="text-start text-sm-center">{{mensaje}}</p>
+                                <p class="text-start text-sm-center" style="color: #fff">{{mensaje}}</p>
 
                             {% else %}
 
-                                <p class="text-start text-sm-center">An approximation of the roof was found for m = 0</p>
+                                <p class="text-start text-sm-center" style="color: #fff">An approximation of the roof was found for m = 0</p>
 
                             {% endif %}
                         </div>

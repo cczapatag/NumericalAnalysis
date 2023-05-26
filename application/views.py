@@ -2,6 +2,7 @@ from django.shortcuts import render
 from application.Biseccion import Biseccion
 from application.ReglaFalsa import ReglaFalsa
 from application.PuntoFijo import PuntoFijo
+from application.Jacobi import Jacobi
 
 # Create your views here.
 
@@ -116,7 +117,44 @@ def gauss_seidel(request):
     return render(request, 'gauss-seidel.html')
 
 def jacobi(request):
-    return render(request, 'jacobi.html')
+
+    resultado = mensaje = datos = None
+
+    if request.POST:
+
+        matrizA = request.POST['matrizA']
+        x0 = request.POST['x0']
+        matrizB = request.POST['matrizB']
+        tolerancia = request.POST['tolerancia']
+        iteraciones = request.POST['iteraciones']
+
+        tolerancia = float(tolerancia)
+        iteraciones = int(iteraciones)
+
+        try:
+            matrizA = matriz(matrizA)
+            x0 = matriz(x0)
+            matrizB = matriz(matrizB)
+
+            if size(matrizA) and size(x0) and size(matrizB) and len(matrizA) == len(x0) and len(matrizA) == len(matrizB):
+                
+                datos = {
+                    'matrizA' : matrizA,
+                    'matrizB' : matrizB,
+                    'x0' : x0,
+                    'tol' : '{:.1e}'.format(tolerancia).replace('e-0', 'e-'),
+                    'iter' : iteraciones,
+                }
+
+                resultado, mensaje = Jacobi.jacobi(matrizA, matrizB, x0, iteraciones, tolerancia)
+
+            else:
+                mensaje = "The matrixes had different sizes."
+
+        except:
+            mensaje = "An error has occurred on the input."
+
+    return render(request, 'jacobi.html', {'resultado': resultado, 'mensaje': mensaje, 'datos': datos})
 
 def multiple_roots(request):
     return render(request, 'multiple-roots.html')
@@ -130,3 +168,28 @@ def secant(request):
 def sor(request):
     return render(request, 'sor.html')
 
+def matriz(mtz):
+
+    mtz = mtz.split(' ')
+
+    arr = []
+    arr2 = []
+
+    i = 0
+    while i < len(mtz):
+        if mtz[i] == ';':
+            arr.append(arr2)
+            arr2 = []
+            i += 1
+            continue
+
+        arr2.append(float(mtz[i]))
+        i += 1
+
+    arr.append(arr2)
+
+    return arr
+
+def size(mtz):
+    subarray_sizes = [len(subarr) for subarr in mtz]
+    return all(size == subarray_sizes[0] for size in subarray_sizes)

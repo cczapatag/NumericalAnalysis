@@ -13,7 +13,7 @@
     <link rel="stylesheet" href="{% static 'assets/css/vanilla-zoom.min.css' %}">
 </head>
 
-<body style="color: var(--bs-gray-800);background: var(--bs-gray-800);">
+<body style="background: var(--bs-gray-800);">
     <nav class="navbar navbar-light navbar-expand-lg fixed-top clean-navbar" style="background: var(--bs-dark);position: relative;">
         <div class="container"><a class="navbar-brand link-light logo" href="..">Corolla<img src="{% static 'assets/img/logo2-removebg-preview.png' %}" width="38" height="41" style="margin-left: 11px;"></a>
             <div style="position: static;display: block;overflow: visible;">
@@ -39,33 +39,33 @@
                             <div style="padding-top: 0px;margin-top: 10px;margin-bottom: 10px;">
                                 <div class="row">
                                     <div class="col-md-6 text-start"><strong>Function f:</strong></div>
-                                    <div class="col-md-6 text-center">{{datos.funf}}</strong></div>
+                                    <div class="col-md-6 text-center" style="color: #fff">{{datos.funf}}</strong></div>
                                 </div>
                             </div>
                             <div style="padding-top: 0px;margin-top: 10px;margin-bottom: 10px;">
                                 <div class="row">
                                     <div class="col-md-6 text-start"><strong>Function g:</strong></div>
-                                    <div class="col-md-6 text-center">{{datos.fung}}</strong></div>
+                                    <div class="col-md-6 text-center" style="color: #fff">{{datos.fung}}</strong></div>
                                 </div>
                             </div>
                             <div style="padding-top: 0px;margin-top: 10px;margin-bottom: 10px;">
                                 <div class="row">
                                     <div class="col-md-6 text-start"><strong>Initial value (x0):</strong></div>
-                                    <div class="col-md-6 text-center">{{datos.x0}}</strong></div>
+                                    <div class="col-md-6 text-center" style="color: #fff">{{datos.x0}}</strong></div>
                                 </div>
                             </div>
                             <div style="padding-top: 0px;margin-top: 10px;margin-bottom: 10px;">
                                 <div class="row">
                                     <div class="col-md-6 text-start"><strong>Tolerance:</strong></div>
-                                    <div class="col-md-6 text-center">{{datos.tol}}</strong></div>
+                                    <div class="col-md-6 text-center" style="color: #fff">{{datos.tol}}</strong></div>
                                 </div>
                             </div>
                             <div style="padding-top: 0px;margin-top: 10px;margin-bottom: 10px;">
-                                <div class="row">
+                                <div class="row">~
                                     <div class="col-md-6 text-start"><strong>Max iterations (Max 100):</strong></div>
-                                    <div class="col-md-6 text-center">{{datos.iter}}</strong></div>
+                                    <div class="col-md-6 text-center" style="color: #fff">{{datos.iter}}</strong></div>
                                 </div>
-                            </div><a class="btn btn-primary d-block w-100" role="button" style="margin-top: 16px; background: var(--bs-purple);" href="../bisection">Return</a>
+                            </div><a class="btn btn-primary d-block w-100" role="button" style="margin-top: 16px; background: var(--bs-purple);" href="../fixed-point">Back</a>
 
                         {% else %}
 
@@ -153,11 +153,11 @@
                         <div>
                             {% if mensaje %}
 
-                                <p class="text-start text-sm-center">{{mensaje}}</p>
+                                <p class="text-start text-sm-center" style="color: #fff">{{mensaje}}</p>
 
                             {% else %}
 
-                                <p class="text-start text-sm-center">An approximation of the roof was found for m = 0</p>
+                                <p class="text-start text-sm-center" style="color: #fff">An approximation of the roof was found for m = 0</p>
 
                             {% endif %}
                         </div>
