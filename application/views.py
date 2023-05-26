@@ -4,6 +4,7 @@ from application.ReglaFalsa import ReglaFalsa
 from application.PuntoFijo import PuntoFijo
 from application.Jacobi import Jacobi
 from application.Gauss import Seidel
+from application.sor import SOR
 
 # Create your views here.
 
@@ -204,7 +205,47 @@ def secant(request):
     return render(request, 'secant.html')
 
 def sor(request):
-    return render(request, 'sor.html')
+            
+    resultado = mensaje = datos = None
+
+    if request.POST:
+
+        matrizA = request.POST['matrizA']
+        x0 = request.POST['x0']
+        matrizB = request.POST['matrizB']
+        tolerancia = request.POST['tolerancia']
+        iteraciones = request.POST['iteraciones']
+        w = request.POST['relax']
+
+        tolerancia = float(tolerancia)
+        iteraciones = int(iteraciones)
+        w = float(w)
+
+        try:
+            matrizA = matriz(matrizA)
+            x0 = matriz(x0)
+            matrizB = matriz(matrizB)
+
+            if size(matrizA) and size(x0) and size(matrizB) and len(matrizA) == len(x0) and len(matrizA) == len(matrizB):
+
+                datos = {
+                    'matrizA' : matrizA,
+                    'matrizB' : matrizB,
+                    'x0' : x0,
+                    'tol' : '{:.1e}'.format(tolerancia).replace('e-0', 'e-'),
+                    'iter' : iteraciones,
+                    'relajacion' : w
+                }
+
+                resultado = SOR.sor(matrizA, matrizB, x0, w, tolerancia, iteraciones)
+
+            else:
+                mensaje = "The matrixes had different sizes."
+
+        except:
+            mensaje = "An error has occurred on the input."
+
+    return render(request, 'sor.html', {'resultado': resultado, 'mensaje': mensaje, 'datos': datos})
 
 def matriz(mtz):
 
@@ -212,6 +253,11 @@ def matriz(mtz):
 
     arr = []
     arr2 = []
+
+    if len(mtz) == 3:
+        arr.append(float(mtz[0]))
+        arr.append(float(mtz[2]))
+        return arr
 
     i = 0
     while i < len(mtz):

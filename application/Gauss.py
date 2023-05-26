@@ -29,7 +29,7 @@ class Seidel():
             tempMapIterData['iteracion'] = str(cont)
             tempMapIterData['x0'] = str(x0)
             tempMapIterData['xn'] = str(xn)
-            tempMapIterData['E'] = str(e)
+            tempMapIterData['E'] = '{:.1e}'.format(e).replace('e-0', 'e-')
             tableListData.append(tempMapIterData.copy())
             tempMapIterData.clear()
 
