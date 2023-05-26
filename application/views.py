@@ -248,6 +248,15 @@ def sor(request):
 
     return render(request, 'sor.html', {'resultado': resultado, 'mensaje': mensaje, 'datos': datos})
 
+def vandermonde(request):
+    return render(request, 'vandermonde.html')
+
+def newton(request):
+    return render(request, 'newton.html')
+
+def spline(request):
+    return render(request, 'spline.html')
+
 def matriz(mtz):
 
     mtz = mtz.split(' ')

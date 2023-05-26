@@ -29,4 +29,7 @@ urlpatterns = [
     path('newton-raphson/', applicationViews.newton),
     path('secant/', applicationViews.secant),
     path('sor/', applicationViews.sor),
+    path('newton/', applicationViews.newton),
+    path('spline/', applicationViews.spline),
+    path('vandermonde/', applicationViews.vandermonde),
 ]
