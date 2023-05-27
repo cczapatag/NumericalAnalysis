@@ -39,19 +39,19 @@
                         {% if datos %}
                             <div style="padding-top: 0px;margin-top: 10px;margin-bottom: 10px;">
                                 <div class="row">
-                                    <div class="col-md-6 text-start"><strong>X:</strong></div>
+                                    <div class="col-md-6 text-center"><strong>X:</strong></div>
                                     <div class="col-md-6 text-center" style="color: #fff">{{datos.arrx}}</div>
                                 </div>
                             </div>
                             <div style="padding-top: 0px;margin-top: 10px;margin-bottom: 10px;">
                                 <div class="row">
-                                    <div class="col-md-6 text-start"><strong>Y:</strong></div>
+                                    <div class="col-md-6 text-center"><strong>Y:</strong></div>
                                     <div class="col-md-6 text-center" style="color: #fff">{{datos.arry}}</div>
                                 </div>
                             </div>
                             <div style="padding-top: 0px;margin-top: 10px;margin-bottom: 10px;">
                                 <div class="row">
-                                    <div class="col-md-6 text-start"><strong>Matrix:</strong></div>
+                                    <div class="col-md-6 text-center"><strong>Matrix:</strong></div>
                                     <div class="col-md-6 text-center" style="color: #fff">
                                         
                                         {% for dato in resultado.resultados%}
@@ -120,6 +120,9 @@
             <div style="margin-bottom: 0px;padding-bottom: 0px;">
                 <h1 class="text-center" style="padding-top: 0px;margin-top: 14px;">How to use it?</h1>
                 <p>X vector or Y vector can't contain a repeat value.</p>
+            </div>
+            <div class="container">
+                <br>
             </div>
         </div>
     </main>

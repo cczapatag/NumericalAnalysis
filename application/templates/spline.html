@@ -35,31 +35,81 @@
             <div class="d-inline" style="display: inline-flex;">
                 <div class="row d-block flex-row" style="position: relative;">
                     <div class="col-lg-12 text-center" style="padding-bottom: 0px;margin: 0px;margin-bottom: 10px;">
-                        <form class="d-inline-block" method="post" style="display: inline-block;position: static;">
-                            
-                            {% csrf_token %}
 
-                            <div class="d-block" style="position: relative;display: grid;">
-                                <div class="text-center align-items-center" style="padding-top: 10px;margin-bottom: 0px;">
-                                    <p style="margin-bottom: 0px;padding-top: 0px;"><strong>Example of input: 1,2,3,4,5,6</strong></p>
+                        {% if datos %}
+
+                            <div style="padding-top: 0px;margin-top: 10px;margin-bottom: 10px;">
+                                <div class="row">
+                                    <div class="col-md-6 text-center"><strong>X:</strong></div>
+                                    <div class="col-md-6 text-center" style="color: #fff">{{datos.arrx}}</div>
                                 </div>
-                                <div style="display: inline;margin-top: 0px;padding-top: 0px;">
-                                    <div class="row text-center" style="display: inline;position: static;">
-                                        <div class="col justify-content-center" style="display: flex;position: static;">
-                                            <div class="align-items-center" style="display: inline-flex;padding: 0;padding-right: 0;padding-left: 0;margin: 5px;">
-                                                <p class="text-center m-auto" style="font-size: 20px;"><strong>X</strong></p><input class="form-control" type="text" name="arrayx" style="margin: 0 5px;" required>
+                            </div>
+                            <div style="padding-top: 0px;margin-top: 10px;margin-bottom: 10px;">
+                                <div class="row">
+                                    <div class="col-md-6 text-center"><strong>Y:</strong></div>
+                                    <div class="col-md-6 text-center" style="color: #fff">{{datos.arry}}</div>
+                                </div>
+                            </div>
+                            <div style="padding-top: 0px;margin-top: 10px;margin-bottom: 10px;">
+                                <div class="row">
+                                    <div class="col-md-6 text-center"><strong>Matrix:</strong></div>
+                                    <div class="col-md-6 text-center" style="color: #fff">
+                                        
+                                        {% for dato in resultado.results%}
+
+                                            {{dato}} 
+                                            <br>
+
+                                        {% endfor %}
+                    
+                                    </div>
+                                </div>
+                            </div>
+
+                            <br>
+
+                            <p class="text-start text-sm-center" style="color: #fff"><strong>Vandermonde polynom</strong></p>
+                            
+                            <p class="text-start text-sm-center" style="color: #fff">{{resultado.coeficientes}}</p>
+                            
+                            <a class="btn btn-primary d-block w-100" role="button" style="margin-top: 16px; background: var(--bs-purple);" href="../spline">Back</a>
+
+                        {% else %}
+
+                            <form class="d-inline-block" method="post" style="display: inline-block;position: static;">
+                                
+                                {% csrf_token %}
+
+                                <div class="d-block" style="position: relative;display: grid;">
+                                    <div class="text-center align-items-center" style="padding-top: 10px;margin-bottom: 0px;">
+                                        <p style="margin-bottom: 0px;padding-top: 0px;"><strong>Example of input: 1,2,3,4,5,6</strong></p>
+                                    </div>
+                                    <div class="d-inline-flex justify-content-center" style="margin-bottom: 10px;margin-top: 10px;">
+                                        <select class="form-select" name="opcion" required>
+                                            <option value="12" selected="">Linear</option>
+                                            <option value="13">Cubic</option>
+                                        </select>
+                                    </div>
+                                    <div style="display: inline;margin-top: 0px;padding-top: 0px;">
+                                        <div class="row text-center" style="display: inline;position: static;">
+                                            <div class="col justify-content-center" style="display: flex;position: static;">
+                                                <div class="align-items-center" style="display: inline-flex;padding: 0;padding-right: 0;padding-left: 0;margin: 5px;">
+                                                    <p class="text-center m-auto" style="font-size: 20px;"><strong>X</strong></p><input class="form-control" type="text" name="arrayx" style="margin: 0 5px;" required>
+                                                </div>
                                             </div>
-                                        </div>
-                                        <div class="col justify-content-center" style="display: flex;">
-                                            <div class="text-center align-items-center" style="display: inline-flex;padding: 0;padding-right: 0;padding-left: 0;margin: 5px;">
-                                                <p class="text-center m-auto" style="font-size: 20px;"><strong>Y</strong></p><input class="form-control" type="text" name="arrayy" style="margin: 0 5px;" required>
+                                            <div class="col justify-content-center" style="display: flex;">
+                                                <div class="text-center align-items-center" style="display: inline-flex;padding: 0;padding-right: 0;padding-left: 0;margin: 5px;">
+                                                    <p class="text-center m-auto" style="font-size: 20px;"><strong>Y</strong></p><input class="form-control" type="text" name="arrayy" style="margin: 0 5px;" required>
+                                                </div>
                                             </div>
                                         </div>
                                     </div>
                                 </div>
-                            </div>
-                            <div class="text-center" style="padding: 0;padding-top: 0px;padding-bottom: 0;padding-right: 20vw;padding-left: 20vw;"><button class="btn btn-primary d-block w-100" type="submit" style="background: var(--bs-purple);">Send</button></div>
-                        </form>
+                                <div class="text-center" style="padding: 0;padding-top: 0px;padding-bottom: 0;padding-right: 20vw;padding-left: 20vw;"><button class="btn btn-primary d-block w-100" type="submit" style="background: var(--bs-purple);">Send</button></div>
+                            </form>
+
+                        {% endif %}
+
                     </div>
                 </div>
                 <div class="d-block">

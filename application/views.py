@@ -9,6 +9,8 @@ from application.Vandermonde import Vandermonde
 from application.MultipleRoots import MultipleRoots
 from application.NewtonRaphson import NewtonRaphson
 from application.Secante import Secante
+from application.Newton import Newton
+from application.Spline import Spline
 
 # Create your views here.
 
@@ -353,10 +355,63 @@ def vandermonde(request):
     return render(request, 'vandermonde.html', {'resultado': resultado, 'mensaje': mensaje, 'datos': datos})
 
 def newton(request):
-    return render(request, 'newton.html')
+    resultado = mensaje = datos = None
+
+    if request.POST:
+
+        x = request.POST['arrayx']
+        y = request.POST['arrayy']
+
+        try:
+            x = funcion(x)
+            y = funcion(y)
+
+            resultado = Newton.newton(x,y)
+
+            datos = {
+                'arrx' : x,
+                'arry' : y
+            }
+        
+        except:
+
+            mensaje = 'An error has occurred in the input.'
+
+    return render(request, 'newton.html', {'resultado': resultado, 'mensaje': mensaje, 'datos': datos})
 
 def spline(request):
-    return render(request, 'spline.html')
+    resultado = mensaje = datos = None
+
+    if request.POST:
+
+        x = request.POST['arrayx']
+        y = request.POST['arrayy']
+        op = request.POST.get('opcion')
+
+        op = int(op)
+
+        try:
+            x = funcion(x)
+            y = funcion(y)
+
+            if op == 12: #Lineal
+                resultado = Spline.splineLineal(x,y)
+            
+            else: #Cubico
+                None
+                
+
+            datos = {
+                'arrx' : x,
+                'arry' : y
+            }
+        
+        except:
+
+            mensaje = 'An error has occurred in the input.'
+
+
+    return render(request, 'spline.html', {'resultado': resultado, 'mensaje': mensaje, 'datos': datos})
 
 def matriz(mtz):
 

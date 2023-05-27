@@ -29,16 +29,16 @@ class Secante():
         fx1 = eval_f(x1)
         iteration = 0
         error = tol + 1
-        results.append([iteration, x0, fx0, float('nan')])
+        results.append([iteration, '{:.10f}'.format(x0), '{:.1e}'.format(fx0).replace('e-0', 'e-'), 'NaN'])
         iteration += 1
-        results.append([iteration, x1, fx1, abs(x1 - x0)])
+        results.append([iteration, '{:.10f}'.format(x1), '{:.1e}'.format(fx1).replace('e-0', 'e-'), '{:.1e}'.format(abs(x1 - x0)).replace('e-0', 'e-')])
  
         while fx1 != 0 and error > tol and iteration < max_iterations:
             x2 = x1 - fx1 * (x1 - x0) / (fx1 - fx0)
             fx2 = eval_f(x2)
             error = abs(x2 - x1)
             iteration += 1
-            results.append([iteration, x2, fx2, error])
+            results.append([iteration, '{:.10f}'.format(x2), '{:.1e}'.format(fx2).replace('e-0', 'e-'), '{:.1e}'.format(error).replace('e-0', 'e-')])
  
             x0 = x1
             fx0 = fx1
@@ -46,8 +46,8 @@ class Secante():
             fx1 = fx2
 
         if fx1 == 0:
-            return results, f"{x1} is a root"
+            return results, f"An approximation of the roof was found for m = {x1}"
         elif error <= tol:
-            return results, f"{x1} is an approximation to a root with a tolerance of {tol}"
+            return results, f"An approximation of the roof was found for m = {x1}"
         else:
-            return results, "The maximum number of iterations was reached"
+            return results, "Given the number of iterations and the tolerance, it was impossible to find a satisfying root"

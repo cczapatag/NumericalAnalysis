@@ -30,7 +30,7 @@ class MultipleRoots():
         
         iteration = 0
         error = tol + 1
-        results.append([iteration, x0, fx, float('nan')])
+        results.append([iteration, '{:.10f}'.format(x0), '{:.1e}'.format(fx).replace('e-0', 'e-'), 'NaN'])
         
         while fx != 0 and dfx != 0 and error > tol and iteration < max_iterations:
             numerator = fx * dfx
@@ -45,13 +45,13 @@ class MultipleRoots():
             
             error = abs(x1 - x0)
             iteration += 1
-            results.append([iteration, x1, fx, error])
+            results.append([iteration, '{:.10f}'.format(x1), '{:.1e}'.format(fx).replace('e-0', 'e-'),'{:.1e}'.format(error).replace('e-0', 'e-')])
             
             x0 = x1
 
         if fx == 0:
-            return results, f"{x0} is a root"
+            return results, f"An approximation of the roof was found for m = {x0}"
         elif error <= tol:
-            return results, f"{x0} is an approximation to a root with a tolerance of {tol}"
+            return results, f"An approximation of the roof was found for m = {x0}"
         else:
-            return results, "The maximum number of iterations was reached"
+            return results, "Given the number of iterations and the tolerance, it was impossible to find a satisfying root"

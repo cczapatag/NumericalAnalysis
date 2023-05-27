@@ -71,7 +71,7 @@
                                     <div class="col-md-6 text-start"><strong>Max iterations (Max 100):</strong></div>
                                     <div class="col-md-6 text-center" style="color: #fff">{{datos.iter}}</strong></div>
                                 </div>
-                            </div><a class="btn btn-primary d-block w-100" role="button" style="margin-top: 16px; background: var(--bs-purple);" href="../bisection">Back</a>
+                            </div><a class="btn btn-primary d-block w-100" role="button" style="margin-top: 16px; background: var(--bs-purple);" href="../multiple-roots">Back</a>
 
                         {% else %}
 
@@ -84,25 +84,25 @@
                                 <div style="padding-top: 0px;margin-top: 10px;margin-bottom: 10px;">
                                     <div class="row">
                                         <div class="col-md-6 text-start"><strong>Function f:</strong></div>
-                                        <div class="col-md-6 text-center"><input class="form-control" type="text" name="funcion" value="log(sin(x)^2 + 1)-(1/2)" required></div>
+                                        <div class="col-md-6 text-center"><input class="form-control" type="text" name="funcion" value="exp(x) - x - 1" required></div>
                                     </div>
                                 </div>
                                 <div style="padding-top: 0px;margin-top: 10px;margin-bottom: 10px;">
                                     <div class="row">
                                         <div class="col-md-6 text-start"><strong>Function f' (derivate of f):</strong></div>
-                                        <div class="col-md-6 text-center"><input class="form-control" name="dfuncion" type="text" required></div>
+                                        <div class="col-md-6 text-center"><input class="form-control" name="dfuncion" type="text" value="exp(x) - 1" required></div>
                                     </div>
                                 </div>
                                 <div style="padding-top: 0px;margin-top: 10px;margin-bottom: 10px;">
                                     <div class="row">
                                         <div class="col-md-6 text-start"><strong>Function f'' (second derivate of f):</strong></div>
-                                        <div class="col-md-6 text-center"><input class="form-control" name="d2funcion" type="text" required></div>
+                                        <div class="col-md-6 text-center"><input class="form-control" name="d2funcion" type="text" value="exp(x)" required></div>
                                     </div>
                                 </div>
                                 <div style="padding-top: 0px;margin-top: 10px;margin-bottom: 10px;">
                                     <div class="row">
                                         <div class="col-md-6 text-start"><strong>Initial value (x0):</strong></div>
-                                        <div class="col-md-6 text-center"><input class="form-control" name="x0" type="text" required></div>
+                                        <div class="col-md-6 text-center"><input class="form-control" name="x0" type="text" value="0.5" required></div>
                                     </div>
                                 </div>
                                 <div style="padding-top: 0px;margin-top: 10px;margin-bottom: 10px;">
