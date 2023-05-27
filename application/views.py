@@ -6,6 +6,9 @@ from application.Jacobi import Jacobi
 from application.Gauss import Seidel
 from application.Sor import SOR
 from application.Vandermonde import Vandermonde
+from application.MultipleRoots import MultipleRoots
+from application.NewtonRaphson import NewtonRaphson
+from application.Secante import Secante
 
 # Create your views here.
 
@@ -198,13 +201,86 @@ def jacobi(request):
     return render(request, 'jacobi.html', {'resultado': resultado, 'mensaje': mensaje, 'datos': datos})
 
 def multiple_roots(request):
-    return render(request, 'multiple-roots.html')
+    resultado = mensaje = datos = None
+
+    if request.POST:
+        funcion = request.POST['funcion']
+        dfuncion = request.POST['dfuncion']
+        d2funcion = request.POST['d2funcion']
+        x0 = request.POST['x0']
+        tolerancia = request.POST['tolerancia']
+        iteraciones = request.POST['iteraciones']
+
+        x0 = float(x0)
+        tolerancia = float(tolerancia)
+        iteraciones = int(iteraciones)
+
+        datos = {
+            'fun': funcion,
+            'dfun': dfuncion,
+            'd2fun': d2funcion,
+            'x0': x0,
+            'tol': '{:.1e}'.format(tolerancia).replace('e-0', 'e-'),
+            'iter': iteraciones
+        }
+
+        resultado, mensaje = MultipleRoots.multiple_roots(funcion, dfuncion, d2funcion, x0, tolerancia, iteraciones)
+
+
+    return render(request, 'multiple-roots.html', {'resultado': resultado, 'mensaje': mensaje, 'datos': datos})
 
 def newton_raphson(request):
-    return render(request, 'newton-raphson.html')
+
+    result = message = data = None
+
+    if request.POST:
+        functionf = request.POST['functionf']
+        functiondf = request.POST['functiond'] 
+        x0 = request.POST['x0']
+        tolerance = request.POST['tolerance']
+        iterations = request.POST['iterations']
+
+        x0 = float(x0)
+        tolerance = float(tolerance)
+        iterations = int(iterations)
+
+        data = {
+            'funf' : functionf,
+            'fundf' : functiondf,
+            'x0' : x0,
+            'tol' : '{:.1e}'.format(tolerance).replace('e-0', 'e-'),
+            'iter' : iterations
+        }
+        result, message = NewtonRaphson.newton_raphson(functionf, functiondf, x0, tolerance, iterations)
+
+    return render(request, 'newton-raphson.html', {'result': result, 'message': message, 'data': data})
 
 def secant(request):
-    return render(request, 'secant.html')
+    result = message = data = None
+
+    if request.POST:
+        functionf = request.POST['functionf']
+        x0 = request.POST['x0']
+        x1 = request.POST['x1']
+        tolerance = request.POST['tolerance']
+        iterations = request.POST['iterations']
+
+        x0 = float(x0)
+        x1 = float(x1)
+        tolerance = float(tolerance)
+        iterations = int(iterations)
+
+        data = {
+            'funf' : functionf,
+            'x0' : x0,
+            'x1' : x1,
+            'tol' : '{:.1e}'.format(tolerance).replace('e-0', 'e-'),
+            'iter' : iterations
+        }
+
+        result, message = Secante.secante(functionf, x0, x1, tolerance, iterations)
+
+    return render(request, 'secant.html', {'result': result, 'message': message, 'data': data})
 
 def sor(request):
             
