@@ -4,10 +4,12 @@ from application.ReglaFalsa import ReglaFalsa
 from application.PuntoFijo import PuntoFijo
 from application.Jacobi import Jacobi
 from application.Gauss import Seidel
-from application.sor import SOR
-from application.MultipleRoots import MultipleRoots as mr
+from application.Sor import SOR
+from application.Vandermonde import Vandermonde
+from application.MultipleRoots import MultipleRoots
 from application.NewtonRaphson import NewtonRaphson
 from application.Secante import Secante
+
 # Create your views here.
 
 def home(request):
@@ -153,7 +155,7 @@ def gauss_seidel(request):
                 mensaje = "The matrixes had different sizes."
 
         except:
-            mensaje = "An error has occurred on the input."
+            mensaje = "An error has occurred in the input."
 
     return render(request, 'gauss-seidel.html', {'resultado': resultado, 'mensaje': mensaje, 'datos': datos})
 
@@ -194,7 +196,7 @@ def jacobi(request):
                 mensaje = "The matrixes had different sizes."
 
         except:
-            mensaje = "An error has occurred on the input."
+            mensaje = "An error has occurred in the input."
 
     return render(request, 'jacobi.html', {'resultado': resultado, 'mensaje': mensaje, 'datos': datos})
 
@@ -222,18 +224,18 @@ def multiple_roots(request):
             'iter': iteraciones
         }
 
-        resultado, mensaje = mr.multiple_roots(funcion, dfuncion, d2funcion, x0, tolerancia, iteraciones)
+        resultado, mensaje = MultipleRoots.multiple_roots(funcion, dfuncion, d2funcion, x0, tolerancia, iteraciones)
 
 
     return render(request, 'multiple-roots.html', {'resultado': resultado, 'mensaje': mensaje, 'datos': datos})
 
-def newton(request):
+def newton_raphson(request):
 
     result = message = data = None
 
     if request.POST:
         functionf = request.POST['functionf']
-        functiondf = request.POST['functiondf'] 
+        functiondf = request.POST['functiond'] 
         x0 = request.POST['x0']
         tolerance = request.POST['tolerance']
         iterations = request.POST['iterations']
@@ -280,7 +282,6 @@ def secant(request):
 
     return render(request, 'secant.html', {'result': result, 'message': message, 'data': data})
 
-
 def sor(request):
             
     resultado = mensaje = datos = None
@@ -320,9 +321,42 @@ def sor(request):
                 mensaje = "The matrixes had different sizes."
 
         except:
-            mensaje = "An error has occurred on the input."
+            mensaje = "An error has occurred in the input."
 
     return render(request, 'sor.html', {'resultado': resultado, 'mensaje': mensaje, 'datos': datos})
+
+def vandermonde(request):
+    
+    resultado = mensaje = datos = None
+
+    if request.POST:
+
+        x = request.POST['arrayx']
+        y = request.POST['arrayy']
+
+        try:
+            x = funcion(x)
+            y = funcion(y)
+
+            resultado = Vandermonde.vandermonde(x,y)
+
+            datos = {
+                'arrx' : x,
+                'arry' : y
+            }
+        
+        except:
+
+            mensaje = 'An error has occurred in the input.'
+
+
+    return render(request, 'vandermonde.html', {'resultado': resultado, 'mensaje': mensaje, 'datos': datos})
+
+def newton(request):
+    return render(request, 'newton.html')
+
+def spline(request):
+    return render(request, 'spline.html')
 
 def matriz(mtz):
 
@@ -365,3 +399,16 @@ def size(mtz):
         return all(size == subarray_sizes[0] for size in subarray_sizes)
     except:
         return True
+    
+def funcion(func):
+    func = func.split(',')
+
+    arr = []
+
+    i = 0
+    while i < len(func):
+        arr.append(float(func[i]))
+        i += 1
+    
+    return arr
+
