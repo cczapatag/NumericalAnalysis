@@ -44,4 +44,4 @@ class Jacobi():
             tempMapIterData['E'] = '{:.1e}'.format(error).replace('error-0', 'error-')
             tableListData.append(tempMapIterData.copy())
             tempMapIterData.clear()
-        return tableListData, f'It converge at the point = {str(xn)}'
+        return tableListData, f'It converges at point = {str(xn)}'

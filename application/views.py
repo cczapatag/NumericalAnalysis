@@ -4,7 +4,8 @@ from application.ReglaFalsa import ReglaFalsa
 from application.PuntoFijo import PuntoFijo
 from application.Jacobi import Jacobi
 from application.Gauss import Seidel
-from application.sor import SOR
+from application.Sor import SOR
+from application.Vandermonde import Vandermonde
 
 # Create your views here.
 
@@ -151,7 +152,7 @@ def gauss_seidel(request):
                 mensaje = "The matrixes had different sizes."
 
         except:
-            mensaje = "An error has occurred on the input."
+            mensaje = "An error has occurred in the input."
 
     return render(request, 'gauss-seidel.html', {'resultado': resultado, 'mensaje': mensaje, 'datos': datos})
 
@@ -192,14 +193,14 @@ def jacobi(request):
                 mensaje = "The matrixes had different sizes."
 
         except:
-            mensaje = "An error has occurred on the input."
+            mensaje = "An error has occurred in the input."
 
     return render(request, 'jacobi.html', {'resultado': resultado, 'mensaje': mensaje, 'datos': datos})
 
 def multiple_roots(request):
     return render(request, 'multiple-roots.html')
 
-def newton(request):
+def newton_raphson(request):
     return render(request, 'newton-raphson.html')
 
 def secant(request):
@@ -244,12 +245,36 @@ def sor(request):
                 mensaje = "The matrixes had different sizes."
 
         except:
-            mensaje = "An error has occurred on the input."
+            mensaje = "An error has occurred in the input."
 
     return render(request, 'sor.html', {'resultado': resultado, 'mensaje': mensaje, 'datos': datos})
 
 def vandermonde(request):
-    return render(request, 'vandermonde.html')
+    
+    resultado = mensaje = datos = None
+
+    if request.POST:
+
+        x = request.POST['arrayx']
+        y = request.POST['arrayy']
+
+        try:
+            x = funcion(x)
+            y = funcion(y)
+
+            resultado = Vandermonde.vandermonde(x,y)
+
+            datos = {
+                'arrx' : x,
+                'arry' : y
+            }
+        
+        except:
+
+            mensaje = 'An error has occurred in the input.'
+
+
+    return render(request, 'vandermonde.html', {'resultado': resultado, 'mensaje': mensaje, 'datos': datos})
 
 def newton(request):
     return render(request, 'newton.html')
@@ -298,3 +323,16 @@ def size(mtz):
         return all(size == subarray_sizes[0] for size in subarray_sizes)
     except:
         return True
+    
+def funcion(func):
+    func = func.split(',')
+
+    arr = []
+
+    i = 0
+    while i < len(func):
+        arr.append(float(func[i]))
+        i += 1
+    
+    return arr
+

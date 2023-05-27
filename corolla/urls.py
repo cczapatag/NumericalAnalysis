@@ -26,7 +26,7 @@ urlpatterns = [
     path('gauss-seidel/', applicationViews.gauss_seidel),
     path('jacobi/', applicationViews.jacobi),
     path('multiple-roots/', applicationViews.multiple_roots),
-    path('newton-raphson/', applicationViews.newton),
+    path('newton-raphson/', applicationViews.newton_raphson),
     path('secant/', applicationViews.secant),
     path('sor/', applicationViews.sor),
     path('newton/', applicationViews.newton),

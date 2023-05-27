@@ -30,4 +30,4 @@ class SOR():
             tempMapIterData.clear()
 
         
-        return tableListData, f'It converges at the point = {str(phi)}'
+        return tableListData, f'It converges at point = {str(phi)}'
