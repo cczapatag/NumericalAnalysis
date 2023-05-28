@@ -4,7 +4,7 @@ from application.ReglaFalsa import ReglaFalsa
 from application.PuntoFijo import PuntoFijo
 from application.Jacobi import Jacobi
 from application.Gauss import Seidel
-from application.Sor import SOR
+from application.sor import SOR
 from application.Vandermonde import Vandermonde
 from application.MultipleRoots import MultipleRoots
 from application.NewtonRaphson import NewtonRaphson
