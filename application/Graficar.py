@@ -2,7 +2,6 @@ import matplotlib.pyplot as plt
 import numpy as np
 import io
 import urllib, base64
-import matplotlib.pyplot as plt
 from math import *
 
 class Graficas:
