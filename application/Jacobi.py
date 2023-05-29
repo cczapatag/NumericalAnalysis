@@ -6,7 +6,6 @@ class Jacobi():
     def jacobi(a,b,x0,n,tol):
         tableListData = []
         tempMapIterData = {}
-
         l = -np.tril(a, -1)
         u = -np.triu(a, 1)
         d = a + l + u

@@ -20,7 +20,6 @@ class Biseccion():
             el número máximo de iteraciones.
         
         """
-
         results = []
         a = float(a)
         b = float(b)
