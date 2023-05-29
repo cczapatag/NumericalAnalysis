@@ -59,13 +59,13 @@ class Newton():
             else:
                 fun += f'{coef[i]}'
 
-            iterHechas += f'(x-{i}) '
+            iterHechas += f'*(x-{i}) '
 
             fun += iterHechas
 
             i += 1
 
-        fun = fun.replace('(x-0)','')
+        fun = fun.replace('*(x-0)','')
         
 
         data = {
