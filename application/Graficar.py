@@ -3,7 +3,6 @@ import numpy as np
 import io
 import urllib, base64
 import matplotlib.pyplot as plt
-import mpld3
 from math import *
 
 class Graficas:
