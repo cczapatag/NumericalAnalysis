@@ -31,8 +31,56 @@
     <main data-bs-toggle="tooltip" data-bss-tooltip="" class="page landing-page" style="color: var(--bs-purple);background: var(--bs-gray-dark);padding-top: 58px;">
         <div>
             <h1>Welcome to Corolla</h1>
-            <p>Lorem ipsum dolor, sit amet consectetur adipisicing elit. Quis ad fugiat commodi temporibus? Qui, aperiam voluptate in iste assumenda praesentium a eius, deserunt provident quod ullam illum accusamus optio? Obcaecati?</p>
+            <br>
         </div>
+
+        <div style="display: flex; text-align: center;">
+
+            {% if graph %}
+
+                <div class="d-inline-block" style="display: inline-block;position: static;">
+
+                    <div class="d-block" style="position: relative;display: grid;">
+                        <div style="display: inline;margin-top: 0px;padding-top: 0px;">
+                            <div class="row text-center" style="display: inline;position: static;">
+                                <div class="col justify-content-center" style="display: flex;position: static;">
+                                        <div class="col-md-6 text-center"><strong>Function:</strong></div>
+                                        <div class="col-md-6 text-center" style="color: #fff">{{datos.fun}}</strong></div>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+                    <div class="text-center" style="padding: 0;padding-top: 0px;padding-bottom: 0;padding-right: 20vw;padding-left: 20vw;"><a class="btn btn-primary d-block w-100" role="button" style="margin-top: 16px; background: var(--bs-purple);" href="../">Back</a></div>
+                </div>
+
+                <div><img src="{{graph}}" alt="grafica"></div>
+            {% else %}
+
+                <form class="d-inline-block" method="post" style="display: inline-block;position: static;">
+                    
+                    {% csrf_token %}
+
+                    <div class="d-block" style="position: relative;display: grid;">
+                        <div style="display: inline;margin-top: 0px;padding-top: 0px;">
+                            <div class="row text-center" style="display: inline;position: static;">
+                                <div class="col justify-content-center" style="display: flex;position: static;">
+                                    <div class="align-items-center" style="display: inline-flex;padding: 0;padding-right: 0;padding-left: 0;margin: 5px;">
+                                        <p class="text-center m-auto" style="font-size: 20px;"><strong>Function</strong></p><input class="form-control form-control" type="text" name="funcion" style="margin: 0 5px;" required>
+                                    </div>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+                    <div class="text-center" style="padding: 0;padding-top: 0px;padding-bottom: 0;padding-right: 20vw;padding-left: 20vw;"><button class="btn btn-primary d-block w-100" type="submit" style="background: var(--bs-purple);">Send</button></div>
+                </form>
+
+                
+                <div><img src="{{default}}" alt="grafica"></div>
+            
+            {% endif %}
+
+        </div>
+
     </main>
     <script src="{% static 'assets/bootstrap/js/bootstrap.min.js' %}"></script>
     <script src="{% static 'assets/js/bs-init.js' %}"></script>

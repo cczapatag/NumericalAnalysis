@@ -11,11 +11,29 @@ from application.NewtonRaphson import NewtonRaphson
 from application.Secante import Secante
 from application.Newton import Newton
 from application.Spline import Spline
+from application.Graficar import Graficas
 
 # Create your views here.
 
 def home(request):
-    return render(request, 'index.html')
+
+    grafica = datos = default = None
+
+    if request.POST:
+        funcion = request.POST['funcion']
+
+        datos = {
+            'fun' : funcion
+        }
+
+        funcion = funcion.replace('^', '**')
+
+        grafica = Graficas.graph_function(funcion)
+    
+    else:
+        default = Graficas.graph_function('x')
+
+    return render(request, 'index.html', {'graph' : grafica, 'default': default, 'datos': datos})
 
 def bisection(request):
 
@@ -398,12 +416,12 @@ def spline(request):
                 resultado = Spline.splineLineal(x,y)
             
             else: #Cubico
-                None
+                resultado = Spline.splineCubica(x,y)
                 
-
             datos = {
                 'arrx' : x,
-                'arry' : y
+                'arry' : y,
+                'op' : op
             }
         
         except:

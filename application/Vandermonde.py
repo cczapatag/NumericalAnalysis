@@ -22,13 +22,13 @@ class Vandermonde():
         for i in coeficientes:
 
             if i[0] != '-':
-                fun += f' + {i}x^{size} '
+                fun += f' + {i}*x^{size} '
             else:
-                fun += f'{i}x^{size} '
+                fun += f'{i}*x^{size} '
             
             size -= 1
 
-        fun = fun.replace('x^1','x').replace('x^0', '')
+        fun = fun.replace('*x^1','*x').replace('*x^0', '')
 
         data = {
             'resultados' : tableListData,
