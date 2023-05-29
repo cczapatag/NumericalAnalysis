@@ -15,8 +15,6 @@ class Graficas:
         
         y = []
 
-        print(f)
-
         for x in intervalo:
         
             valorX = { 'x' : x}

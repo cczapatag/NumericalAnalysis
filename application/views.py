@@ -416,12 +416,12 @@ def spline(request):
                 resultado = Spline.splineLineal(x,y)
             
             else: #Cubico
-                None
+                resultado = Spline.splineCubica(x,y)
                 
-
             datos = {
                 'arrx' : x,
-                'arry' : y
+                'arry' : y,
+                'op' : op
             }
         
         except:
